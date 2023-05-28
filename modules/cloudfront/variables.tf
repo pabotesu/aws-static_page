@@ -1,3 +1,1 @@
-resource "aws_cloudfront_distribution" "static-www" {
-  
-}
+variable "static-www-bucket-id" {}

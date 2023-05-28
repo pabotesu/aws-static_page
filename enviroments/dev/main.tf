@@ -4,9 +4,17 @@ provider "aws" {
     region =  "${var.aws_region}"
 }
 
-module "aws_vpc" {
+module "aws_s3" {
     source = "../../modules/s3"
     
     #Set Palamater
     enviroments       = "${var.enviroments}"
+}
+
+module "aws_cloudfront" {
+    source = "../../modules/cloudfront"
+
+    #Set Palamater
+    enviroments       = "${var.enviroments}"
+    bucket            = "${module.aws_s3.static-www-bucket-id}"
 }
