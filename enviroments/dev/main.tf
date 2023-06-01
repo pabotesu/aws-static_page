@@ -8,13 +8,15 @@ module "aws_s3" {
     source = "../../modules/s3"
     
     #Set Palamater
-    enviroments       = "${var.enviroments}"
+    enviroments                     = "${var.enviroments}"
+    cdn-access-identity-iam_arn     = "${module.aws_cloudfront.cdn-access-identity-iam_arn}"
 }
 
 module "aws_cloudfront" {
     source = "../../modules/cloudfront"
 
     #Set Palamater
-    enviroments       = "${var.enviroments}"
-    bucket            = "${module.aws_s3.static-www-bucket-id}"
+    enviroments                            = "${var.enviroments}"
+    static-www-bucket-id                   = "${module.aws_s3.static-www-bucket-id}"
+    static-www-bucket-regional_domain_name = "${module.aws_s3.static-www-bucket-regional_domain_name}"
 }
