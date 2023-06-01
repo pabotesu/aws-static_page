@@ -50,14 +50,14 @@ data "aws_iam_policy_document" "static-www-bucket" {
     effect = "Allow"
     principals {
         type = "AWS"
-        identifiers = [aws_cloudfront_origin_access_identity.static-www.iam_arn]
+        identifiers = ["${var.cdn-access-identity-iam_arn}"]
     }
     actions = [
         "s3:GetObject"
     ]
 
     resources = [
-        "${aws_s3_bucket.bucket.arn}/*"
+        "${aws_s3_bucket.static-www-bucket.arn}/*"
     ]
   }
 }
